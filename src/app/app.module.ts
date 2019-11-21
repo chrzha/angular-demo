@@ -9,7 +9,8 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserService } from './service/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule } from "@angular/material";
+  MatSortModule, MatTableModule, MatDividerModule } from "@angular/material";
+
 
 
  
@@ -29,7 +30,11 @@ import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatDividerModule
+  ],
+  exports: [
+    
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

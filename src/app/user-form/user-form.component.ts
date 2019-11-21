@@ -16,7 +16,7 @@ export class UserFormComponent {
     private route: ActivatedRoute, 
       private router: Router, 
         private userService: UserService) {
-    this.user = new User();
+            this.user = new User();
   }
  
   onSubmit() {
