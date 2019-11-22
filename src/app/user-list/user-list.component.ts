@@ -4,6 +4,8 @@ import { UserService } from '../service/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatTable } from '@angular/material';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
  
 @Component({
@@ -14,24 +16,52 @@ import { MatSort } from '@angular/material/sort';
 export class UserListComponent implements OnInit, AfterViewInit {
  
   users: User[];
-  displayedColumns: string[] = ['id', 'name', 'email'];
+  isLoading = true;
+  displayedColumns: string[] = ['id', 'name', 'email', 'action'];
   usersDataSource = new MatTableDataSource<User>();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+            private dialog: MatDialog) {
   }
  
   ngOnInit() {
     this.userService.findAll().subscribe(data => {
       this.users = data;
+      this.isLoading = false;
       this.usersDataSource = new MatTableDataSource<User>(this.users);
       this.usersDataSource.paginator = this.paginator;
       this.usersDataSource.sort = this.sort;
     });
   }
   ngAfterViewInit(): void {
+  }
+
+  openDialog(action: string, obj: any) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '250px',
+      data: obj
+    });
+ 
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.event == 'Update'){
+        this.updateRowData(result.data);
+      }else if(result.event == 'Delete'){
+        this.deleteRowData(result.data);
+      }
+    });
+  }
+  
+  updateRowData(user: User){
+    console.log(user);
+  }
+
+  deleteRowData(user: User){
+    console.log('deleting user: ' + user.id);
+    this.userService.delete(user.id).subscribe();
   }
 }
 

@@ -3,6 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user';
 import { Observable } from 'rxjs/Observable';
  
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable()
 export class UserService {
  
@@ -17,6 +24,12 @@ export class UserService {
   }
  
   public save(user: User) {
+    console.log(user);
     return this.http.post<User>(this.usersUrl, user);
+  }
+
+  public delete(id: string): Observable<{}> {
+    const url = `${this.usersUrl}/${id}`;
+    return this.http.delete(url, httpOptions);
   }
 }

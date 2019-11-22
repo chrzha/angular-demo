@@ -66,3 +66,10 @@ rxjs                         6.4.0
 
 ### Tips
 Clean npm cache force: C:\Users\{账户}\下的.npmrc文件
+
+```bash
+ng generate class xxx
+ng generate service xxx
+ng generate component xxx
+
+```

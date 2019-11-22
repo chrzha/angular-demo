@@ -6,19 +6,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserService } from './service/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule, MatDividerModule } from "@angular/material";
-
-
-
+  MatSortModule, MatTableModule, MatDividerModule, MatCardModule, MatButtonModule, MatDialogModule } from "@angular/material";
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UserFormComponent
+    UserFormComponent,
+    UserDetailComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +32,18 @@ import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSortModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCardModule, 
+    MatButtonModule,
+    MatDialogModule
   ],
   exports: [
     
   ],
   providers: [UserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DialogBoxComponent
+  ],
 })
 export class AppModule { }
